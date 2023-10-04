@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+    db:
+        image: postgres:13
+        restart: always
+        environment:
+            POSTGRES_DB: 'toolit-dev'
+            POSTGRES_USER: 'toolit'
+            POSTGRES_PASSWORD: 'toolitdev'
+            POSTGRES_INITDB_ARGS: '--auth-host=md5 --auth-local=md5'
+        ports:
+            - '5432:5432'
+        volumes:
+            - my-db:/var/lib/postgresql/data
+            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+volumes:
+    my-db:
