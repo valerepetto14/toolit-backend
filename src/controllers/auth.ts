@@ -43,7 +43,8 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
 
 export const signInWithGoogle = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { name, lastname, email, googleId } = req.body;
+        const { name, lastname, email, googleId, imageUrl } = req.body;
+        console.log(req.body);
         const userExists = await prisma.users.findUnique({
             where: {
                 email,
@@ -59,6 +60,7 @@ export const signInWithGoogle = async (req: Request, res: Response, next: NextFu
                     lastname,
                     email,
                     googleId,
+                    imageUrl,
                     type: userTypes.USER,
                     status: userStatus.ACTIVE,
                 },
@@ -75,6 +77,7 @@ export const signInWithGoogle = async (req: Request, res: Response, next: NextFu
                     email: user.email,
                     status: user.status,
                     type: user.type,
+                    imageUrl: user.imageUrl,
                 },
                 token,
             };
@@ -110,9 +113,6 @@ export const signUp = async (req: Request, res: Response, next: NextFunction) =>
             },
         });
         if (!userExists) {
-            if (password !== confirmPassword) {
-                throw Errors.passwordsDoNotMatch;
-            }
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = await prisma.users.create({
                 data: {

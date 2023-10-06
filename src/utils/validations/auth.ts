@@ -10,12 +10,12 @@ export const signUpSchema = z.object({
     lastname: z.string().min(3),
     email: z.string().email(),
     password: z.string().min(6),
-    confirmPassword: z.string().min(6),
 });
 
 export const signInGoogleSchema = z.object({
+    email: z.string().email(),
     name: z.string().min(3),
     lastname: z.string().min(3),
-    email: z.string().email(),
     googleId: z.string().min(3),
+    imageUrl: z.string().min(3),
 });

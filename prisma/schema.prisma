@@ -17,6 +17,7 @@ model Users {
   email     String    @db.VarChar(50) @unique
   password  String?   @db.VarChar(255)
   googleId  String?   @db.VarChar(255)
+  imageUrl String?   @db.VarChar(255)
   type      String    @db.VarChar(10) @default("admin")
   status    String    @db.VarChar(10) @default("active")
   created_at DateTime  @default(now())

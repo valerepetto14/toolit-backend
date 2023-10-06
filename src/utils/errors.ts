@@ -19,7 +19,7 @@ const Errors = {
     badRequest: new apiError('Bad Request', 400),
     userAlreadyExists: new apiError('User already exists', 409),
     passwordsDoNotMatch: new customError('Bad Request', 400, 'passwordsDoNotMatch'),
-    userNotFound: new customError('User not found', 404, 'userNotFound'),
+    userNotFound: new customError('Not found', 404, 'userNotFound'),
 };
 
 export default Errors;
