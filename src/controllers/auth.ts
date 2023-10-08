@@ -27,6 +27,7 @@ export const signIn = async (req: Request, res: Response, next: NextFunction) =>
                         name: user.name,
                         lastname: user.lastname,
                         email: user.email,
+                        imageUrl: user.imageUrl,
                         status: user.status,
                         type: user.type,
                     },
@@ -92,12 +93,14 @@ export const signInWithGoogle = async (req: Request, res: Response, next: NextFu
                     name: userExists.name,
                     lastname: userExists.lastname,
                     email: userExists.email,
+                    imageUrl: userExists.imageUrl,
                     status: userExists.status,
                     type: userExists.type,
                 },
                 token,
             };
         }
+        console.log(responseBody);
         return res.status(200).json(responseBody);
     } catch (error) {
         next(error);
