@@ -9,7 +9,7 @@ import { Auth } from './routes';
 import handleErrors from './middlewares/handleErrors';
 
 const app = new App({
-    port: 3001,
+    port: Number(process.env.PORT) || 3000,
     middleWares: [Express.json(), Express.urlencoded({ extended: true }), cors(), morgan('dev')],
     routes: [
         ['/auth', Auth],

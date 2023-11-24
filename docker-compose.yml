@@ -12,6 +12,31 @@ services:
             - '5432:5432'
         volumes:
             - my-db:/var/lib/postgresql/data
-            - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    back:
+        image: backend-toolit
+        restart: always
+        environment:
+            DATABASE_URL: 'postgres://toolit:toolitdev@db:5432/toolit-dev?schema=public'
+            PORT: '3000'
+            JWT_SECRET: 'secret'
+        ports:
+            - '3000:3000'
+        depends_on:
+            - db
+    # app:
+    #     container_name: toolit-backend-dev
+    #     build:
+    #         context: .
+    #         args:
+    #             NODE_ENV: 'development'
+    #             DATABASE_URL: 'postgres://toolit:toolitdev@db:5432/toolit-dev'
+    #             PORT: '3000'
+    #             JWT_SECRET: 'secret'
+    #         dockerfile: dockerfile
+    #     ports:
+    #         - '3000:3000'
+    #     depends_on:
+    #         - db
 volumes:
     my-db:
